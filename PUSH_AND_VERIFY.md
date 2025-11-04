@@ -8,6 +8,7 @@
 cd jj-agent
 
 # Sanity check
+git update-index -q --refresh
 git status
 git log -1 --oneline
 git tag -l v0.1.0

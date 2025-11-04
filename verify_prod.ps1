@@ -3,9 +3,14 @@
 
 $ErrorActionPreference = "Stop"
 
+# Change to script directory
+$scriptPath = Split-Path -Parent $MyInvocation.MyCommand.Path
+Set-Location $scriptPath
+
 Write-Host "==========================================" -ForegroundColor Cyan
 Write-Host "JJ Agent v0.1.0 Production Verification" -ForegroundColor Cyan
 Write-Host "==========================================" -ForegroundColor Cyan
+Write-Host "Running from: $scriptPath" -ForegroundColor Gray
 Write-Host ""
 
 # Configuration
