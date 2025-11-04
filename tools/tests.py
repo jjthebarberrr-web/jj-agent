@@ -30,7 +30,7 @@ class TestTool:
                 pkg = json.loads((work_dir / "package.json").read_text())
                 if "jest" in pkg.get("devDependencies", {}) or "jest" in pkg.get("dependencies", {}):
                     return "jest"
-            except:
+            except Exception:
                 pass
         
         # Default to pytest for Python, jest for Node

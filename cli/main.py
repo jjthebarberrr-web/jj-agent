@@ -9,12 +9,12 @@ import sys
 agent_root = Path(__file__).parent.parent
 sys.path.insert(0, str(agent_root))
 
-from config import config
-from api.llm_client import LLMClient
-from agent import Planner, Executor
-from state.manager import StateManager
-from metrics import metrics
-from cli.commands import cmd_doctor, cmd_config_show, cmd_version
+from config import config  # noqa: E402
+from api.llm_client import LLMClient  # noqa: E402
+from agent import Planner, Executor  # noqa: E402
+from state.manager import StateManager  # noqa: E402
+from metrics import metrics  # noqa: E402
+from cli.commands import cmd_doctor, cmd_config_show, cmd_version  # noqa: E402
 
 
 async def run_job(args):

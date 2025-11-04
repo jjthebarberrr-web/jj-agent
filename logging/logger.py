@@ -3,7 +3,7 @@
 import json
 import sys
 from pathlib import Path
-from typing import Dict, Any, Optional
+from typing import Any, Optional
 from datetime import datetime
 import re
 

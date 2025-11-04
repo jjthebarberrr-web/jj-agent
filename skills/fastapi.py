@@ -1,6 +1,6 @@
 """FastAPI scaffolding skill."""
 
-from typing import Dict, Any, List
+from typing import Dict, Any
 
 
 def get_fastapi_skill() -> Dict[str, Any]:

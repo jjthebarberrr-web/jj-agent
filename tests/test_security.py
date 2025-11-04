@@ -1,6 +1,5 @@
 """Security tests for path and command validation."""
 
-import pytest
 from pathlib import Path
 from runtime.localsafe import LocalSafeRuntime
 

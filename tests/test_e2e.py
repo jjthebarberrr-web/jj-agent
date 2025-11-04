@@ -41,7 +41,7 @@ async def test_dry_run_planning():
         assert any(step.get("tool") == "fs_write" for step in plan), "Plan should include file writes"
         
         # Execute in dry-run mode
-        result = await executor.execute_plan(plan)
+        await executor.execute_plan(plan)
         
         # Should not create any files
         assert not any((workspace / "main.py").exists() for _ in [1]), "No files should be created in dry-run"

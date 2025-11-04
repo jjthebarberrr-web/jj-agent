@@ -1,9 +1,7 @@
 """File system operations tool."""
 
-import os
-import shutil
 from pathlib import Path
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any
 import difflib
 
 

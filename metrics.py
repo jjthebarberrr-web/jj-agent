@@ -1,9 +1,6 @@
 """Metrics collection for monitoring."""
 
 from typing import Dict, Any
-from collections import defaultdict
-import time
-from datetime import datetime
 
 
 class Metrics:

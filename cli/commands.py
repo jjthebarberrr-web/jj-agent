@@ -1,9 +1,7 @@
 """Additional CLI commands (doctor, config, etc.)."""
 
-import json
 import sys
 from pathlib import Path
-from typing import Dict, Any
 import subprocess
 
 from ..config import config
@@ -34,10 +32,9 @@ def cmd_doctor() -> int:
         )
         if result.returncode == 0:
             print(f"Docker: {result.stdout.decode().strip()}")
-            docker_ok = True
         else:
             issues.append("Docker not found")
-    except:
+    except Exception:
         issues.append("Docker not available")
     
     # Workspace
@@ -69,7 +66,7 @@ def cmd_doctor() -> int:
     if api_key:
         print(f"\nAPI Key: Set (length: {len(api_key)})")
     else:
-        print(f"\nAPI Key: NOT SET")
+        print("\nAPI Key: NOT SET")
         issues.append("OPENAI_API_KEY not set")
     
     # Permissions
@@ -77,10 +74,10 @@ def cmd_doctor() -> int:
         test_file = workspace / ".jj_test"
         test_file.write_text("test")
         test_file.unlink()
-        print(f"\nPermissions: Workspace writable")
+        print("\nPermissions: Workspace writable")
     except Exception as e:
         issues.append(f"Workspace not writable: {e}")
-        print(f"\nPermissions: Workspace NOT writable")
+        print("\nPermissions: Workspace NOT writable")
     
     # Summary
     print("\n" + "=" * 60)
@@ -128,12 +125,12 @@ def cmd_config_show() -> int:
         print(f"  Allowed Commands: {len(capabilities.get('allowed_commands', []))} patterns")
         
         network = capabilities.get("network", {})
-        print(f"\nNetwork:")
+        print("\nNetwork:")
         print(f"  Allow Web: {network.get('allow_web', False)}")
         print(f"  Allowed Domains: {len(network.get('allowed_domains', []))}")
         
         budgets = capabilities.get("budgets", {})
-        print(f"\nBudgets:")
+        print("\nBudgets:")
         print(f"  Job Minutes: {budgets.get('job_minutes', 20)}")
         print(f"  Web Dollars: ${budgets.get('web_dollars', 2.00)}")
         

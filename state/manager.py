@@ -83,7 +83,7 @@ class StateManager:
             try:
                 run_data = json.loads(run_file.read_text(encoding="utf-8"))
                 runs.append(run_data)
-            except:
+            except Exception:
                 continue
         
         return runs

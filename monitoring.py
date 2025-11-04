@@ -1,7 +1,6 @@
 """Error monitoring integration (Sentry/OpenTelemetry)."""
 
 import os
-from typing import Optional
 
 
 class Monitoring:

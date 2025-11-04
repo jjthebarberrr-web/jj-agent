@@ -1,6 +1,6 @@
 """LLM client wrapper for OpenAI API."""
 
-from typing import Optional, Dict, Any
+from typing import Optional
 import os
 from openai import AsyncOpenAI
 

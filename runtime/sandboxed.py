@@ -3,7 +3,6 @@
 import subprocess
 from pathlib import Path
 from typing import Dict, Any, Optional
-import json
 
 
 class SandboxedRuntime:
@@ -24,7 +23,7 @@ class SandboxedRuntime:
             )
             if result.returncode == 0:
                 self.container_runtime = "podman"
-        except:
+        except Exception:
             pass
     
     def _build_run_command(

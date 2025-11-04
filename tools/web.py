@@ -2,7 +2,6 @@
 
 from pathlib import Path
 from typing import Dict, Any, Optional
-import re
 from urllib.parse import urlparse
 
 from ..config import config
@@ -96,8 +95,9 @@ class WebTool:
             import httpx
             
             # Set User-Agent
+            version = getattr(config, 'version', '0.1.0')
             headers = {
-                "User-Agent": f"JJ-Agent/{config.version}"
+                "User-Agent": f"JJ-Agent/{version}"
             }
             
             # Fetch with timeout

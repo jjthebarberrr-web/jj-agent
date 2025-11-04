@@ -2,7 +2,6 @@
 
 from pathlib import Path
 from typing import Dict, Any, List, Optional
-import json
 from datetime import datetime
 import sys
 import time
@@ -11,16 +10,16 @@ import time
 tools_dir = Path(__file__).parent.parent / "tools"
 sys.path.insert(0, str(tools_dir.parent))
 
-from tools import (
+from tools import (  # noqa: E402
     FileSystemTool, ShellTool, GitTool, 
     PackageTool, DockerTool, TestTool
 )
 # Import logging after path setup
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from logging import get_logger, AuditLogger
-from metrics import metrics
-from monitoring import monitoring
-import webbrowser
+from logging import get_logger, AuditLogger  # noqa: E402
+from metrics import metrics  # noqa: E402
+from monitoring import monitoring  # noqa: E402
+import webbrowser  # noqa: E402
 
 
 class Executor:
@@ -234,7 +233,7 @@ class Executor:
         success = all(r["result"].get("success", False) for r in results)
         
         self.logger.info(
-            f"Plan execution completed",
+            "Plan execution completed",
             success=success,
             duration_seconds=duration,
             steps=len(plan)
