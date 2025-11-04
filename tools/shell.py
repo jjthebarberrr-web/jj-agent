@@ -3,8 +3,16 @@
 from pathlib import Path
 from typing import Dict, Any, Optional
 
-from ..config import config
-from ..runtime import LocalSafeRuntime, SandboxedRuntime
+try:
+    from ..config import config
+    from ..runtime import LocalSafeRuntime, SandboxedRuntime
+except ImportError:
+    # Fallback for direct execution
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+    from config import config
+    from runtime import LocalSafeRuntime, SandboxedRuntime
 
 
 class ShellTool:

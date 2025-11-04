@@ -35,8 +35,14 @@ jobs:
         run: |
           pip install -r requirements.txt
           pip install pytest pytest-asyncio httpx
+      - name: Install package in editable mode
+        run: |
+          pip install -e .
+      - name: Set PYTHONPATH
+        run: |
+          echo "PYTHONPATH=${{ github.workspace }}" >> $GITHUB_ENV
       - name: Run tests
-        run: pytest -v
+        run: pytest -v tests/
 
   build-test:
     needs: [lint, test]
