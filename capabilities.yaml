@@ -1,0 +1,86 @@
+# JJ Agent Capabilities Configuration
+# Defines allowed/denied paths, commands, and network rules
+
+allowed_paths:
+  # Allow workspace root (will be set dynamically)
+  - "${workspace}/**"
+  
+denied_paths:
+  # System directories
+  - "/**"
+  - "C:/Windows/**"
+  - "C:/Program Files/**"
+  - "C:/Program Files (x86)/**"
+  - "${HOME}/**"
+  - "~/**"
+  # Git internals
+  - "**/.git/**"
+  
+allowed_commands:
+  # Package managers
+  - "uv"
+  - "pip"
+  - "pip3"
+  - "npm"
+  - "pnpm"
+  - "yarn"
+  - "python"
+  - "python3"
+  - "node"
+  - "npx"
+  # Testing
+  - "pytest"
+  - "jest"
+  - "npm test"
+  - "pnpm test"
+  # Git
+  - "git"
+  # Docker
+  - "docker"
+  - "docker-compose"
+  # Common utilities
+  - "echo"
+  - "cat"
+  - "ls"
+  - "dir"
+  - "cd"
+  - "mkdir"
+  - "rm"
+  - "rmdir"
+  - "cp"
+  - "copy"
+  - "mv"
+  - "move"
+  - "curl"
+  - "wget"
+  - "powershell"
+  - "cmd"
+  
+denied_commands:
+  # Dangerous patterns
+  - "rm -rf /"
+  - "rm -rf *"
+  - "format"
+  - "del /f /s /q"
+  - "rd /s /q"
+  # Unsafe pipe patterns
+  - "curl | bash"
+  - "curl | sh"
+  - "wget | bash"
+  - "wget | sh"
+  # Fork bombs
+  - ":(){ :|:& };:"
+  
+network_rules:
+  allowed_domains:
+    - "pypi.org"
+    - "npmjs.com"
+    - "github.com"
+    - "raw.githubusercontent.com"
+  denied_domains:
+    - "*"
+  
+sandbox:
+  enabled: false  # Can be enabled with Docker
+  timeout: 300  # 5 minutes
+

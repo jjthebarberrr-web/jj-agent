@@ -1,0 +1,75 @@
+# JJ Agent Production Capabilities Configuration
+# This file is REQUIRED when JJ_ENV=production
+
+allowed_paths:
+  - "~/code"
+  - "/srv/jj/workspaces"
+  - "${workspace}/**"
+
+denied_paths:
+  - "/**"
+  - "C:/Windows/**"
+  - "C:/Program Files/**"
+  - "C:/Program Files (x86)/**"
+  - "${HOME}/.ssh"
+  - "${HOME}/.ssh/**"
+
+deny_globs:
+  - "**/.ssh/**"
+  - "**/.env"
+  - "**/node_modules/**"
+  - "**/.git/**"
+
+allowed_commands:
+  # Regex patterns for allowed commands
+  - "^git( |$)"
+  - "^(uv|pip|pip3|python|python3) "
+  - "^(npm|pnpm|yarn) "
+  - "^docker compose "
+  - "^pytest( |$)"
+  - "^jest( |$)"
+
+denied_commands:
+  # Dangerous patterns
+  - "rm -rf /"
+  - "rm -rf *"
+  - "format"
+  - "del /f /s /q"
+  - "rd /s /q"
+  - "curl | bash"
+  - "curl | sh"
+  - "wget | bash"
+  - "wget | sh"
+  - ":(){ :|:& };:"
+
+network:
+  allow_web: false  # Disabled by default in prod
+  allowed_domains:
+    - "docs.python.org"
+    - "pypi.org"
+    - "github.com"
+    - "raw.githubusercontent.com"
+
+budgets:
+  job_minutes: 20
+  web_dollars: 2.00
+
+timeouts:
+  tool_seconds: 180
+  fetch_seconds: 12
+
+logging:
+  redact_patterns:
+    - "sk-[A-Za-z0-9]{20,}"
+    - "ghp_[A-Za-z0-9]{36}"
+    - "xoxb-[A-Za-z0-9-]+"
+    - "Bearer [A-Za-z0-9]{20,}"
+
+sandbox:
+  enabled: false  # Can be enabled with Docker
+  pids_limit: 100
+  cpus: "1.0"
+  memory: "512m"
+  read_only_root: true
+  no_new_privileges: true
+

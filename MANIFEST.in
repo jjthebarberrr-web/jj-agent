@@ -1,0 +1,10 @@
+include capabilities.yaml
+include capabilities.prod.yaml
+include jj-agent.service
+include logrotate.conf
+include README.md
+include CHANGELOG.md
+include SECURITY.md
+include OPERATIONS.md
+recursive-include tests *.py
+

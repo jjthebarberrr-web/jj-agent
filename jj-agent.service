@@ -1,0 +1,25 @@
+[Unit]
+Description=JJ Agent Service
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+Environment=JJ_ENV=production
+Environment=TZ=America/Phoenix
+EnvironmentFile=/etc/jj-agent/jj.env
+User=jj
+Group=jj
+ExecStart=/usr/local/bin/jj --daemon --listen 127.0.0.1:5858
+Restart=on-failure
+RestartSec=10
+RuntimeMaxSec=1h
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+ReadWritePaths=/srv/jj/workspaces /var/log/jj
+
+[Install]
+WantedBy=multi-user.target
+
