@@ -1,0 +1,45 @@
+# Optional: Manual verification workflow
+# Can be triggered manually after release
+
+name: verify-release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to verify'
+        required: true
+        default: 'v0.1.0'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      
+      - name: Install pipx
+        run: |
+          python -m pip install --upgrade pip
+          pip install pipx
+          pipx ensurepath
+      
+      - name: Install jj-agent
+        run: |
+          pipx install "jj-agent==${GITHUB_REF#refs/tags/}" || pipx install jj-agent
+      
+      - name: Verify installation
+        run: |
+          jj version
+          jj doctor
+      
+      - name: Test production mode
+        env:
+          JJ_ENV: production
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          jj run --dry-run "Create FastAPI skeleton" --workspace ./test-workspace
+
