@@ -2,9 +2,7 @@
 
 from setuptools import setup, find_packages
 from pathlib import Path
-
 import os
-from pathlib import Path
 
 readme = Path(__file__).parent / "README.md"
 readme_content = readme.read_text(encoding="utf-8") if readme.exists() else ""
