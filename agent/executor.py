@@ -21,7 +21,7 @@ from tools import (  # noqa: E402
 
 # Import logging after path setup
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from logging import get_logger, AuditLogger  # noqa: E402
+from jj_agent.logging import get_logger, AuditLogger  # noqa: E402
 from metrics import metrics  # noqa: E402
 from monitoring import monitoring  # noqa: E402
 import webbrowser  # noqa: E402

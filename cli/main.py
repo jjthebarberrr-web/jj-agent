@@ -60,7 +60,7 @@ async def run_job(args):
     state_manager = StateManager(state_dir)
     job_id = state_manager.start_run(args.prompt, workspace, dry_run=dry_run)
 
-    from logging import get_logger
+    from jj_agent.logging import get_logger
 
     logger = get_logger(job_id=job_id)
     logger.info(
