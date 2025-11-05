@@ -32,8 +32,7 @@ async def readyz() -> Dict[str, Any]:
         return {"status": "ready", "version": config.version}
     except Exception as e:
         return JSONResponse(
-            status_code=503,
-            content={"status": "not ready", "error": str(e)}
+            status_code=503, content={"status": "not ready", "error": str(e)}
         )
 
 
@@ -51,5 +50,5 @@ async def version() -> Dict[str, str]:
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=5858)
 
+    uvicorn.run(app, host="0.0.0.0", port=5858)

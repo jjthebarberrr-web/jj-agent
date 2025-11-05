@@ -11,7 +11,7 @@ def test_production_mode_detection():
     config = Config()
     assert config.is_production
     assert config.env == "production"
-    
+
     os.environ.pop("JJ_ENV", None)
     config = Config()
     assert not config.is_production
@@ -22,7 +22,7 @@ def test_capabilities_loading():
     config = Config()
     agent_dir = Path(__file__).parent.parent
     workspace = Path.home() / "code"
-    
+
     # Should load if file exists
     try:
         caps = config.load_capabilities(agent_dir, workspace)
@@ -35,9 +35,8 @@ def test_capabilities_loading():
 def test_secret_redaction():
     """Test secret redaction."""
     config = Config()
-    
+
     text = "api_key=sk-1234567890abcdefghij"
     redacted = config.redact_secrets(text)
-    
-    assert "sk-" not in redacted or "[REDACTED]" in redacted
 
+    assert "sk-" not in redacted or "[REDACTED]" in redacted

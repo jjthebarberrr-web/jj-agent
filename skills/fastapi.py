@@ -111,7 +111,7 @@ async def read_users_me(current_user: dict = Depends(get_current_user)):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
-"""
+""",
             },
             {
                 "path": "requirements.txt",
@@ -126,7 +126,7 @@ psycopg2-binary==2.9.9
 pytest==7.4.3
 pytest-asyncio==0.21.1
 httpx==0.25.2
-"""
+""",
             },
             {
                 "path": "docker-compose.yml",
@@ -151,7 +151,7 @@ services:
 
 volumes:
   postgres_data:
-"""
+""",
             },
             {
                 "path": "test_main.py",
@@ -203,7 +203,7 @@ def test_protected_endpoint():
     )
     assert response.status_code == 200
     assert response.json()["username"] == "admin"
-"""
+""",
             },
             {
                 "path": ".gitignore",
@@ -221,7 +221,7 @@ dist/
 build/
 .env
 .venv
-"""
+""",
             },
             {
                 "path": "README.md",
@@ -270,8 +270,7 @@ Use the JWT token in the Authorization header:
 ```
 Authorization: Bearer <token>
 ```
-"""
-            }
-        ]
+""",
+            },
+        ],
     }
-

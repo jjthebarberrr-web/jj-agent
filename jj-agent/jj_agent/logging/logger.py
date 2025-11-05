@@ -12,12 +12,12 @@ from ..config import config
 
 class Logger:
     """Structured JSON logger."""
-    
+
     def __init__(self, job_id: Optional[str] = None, log_file: Optional[Path] = None):
         self.job_id = job_id
         self.log_file = log_file
         self.redact_patterns = config.redact_patterns
-    
+
     def _redact(self, data: Any) -> Any:
         """Recursively redact secrets from data."""
         if isinstance(data, str):
@@ -31,7 +31,7 @@ class Logger:
             return [self._redact(item) for item in data]
         else:
             return data
-    
+
     def _log(self, level: str, message: str, **kwargs):
         """Write structured log entry."""
         log_entry = {
@@ -39,16 +39,16 @@ class Logger:
             "level": level,
             "message": message,
             "job_id": self.job_id,
-            **kwargs
+            **kwargs,
         }
-        
+
         # Redact secrets
         log_entry = self._redact(log_entry)
-        
+
         # Write to stdout as JSON
         json_str = json.dumps(log_entry)
         print(json_str, file=sys.stderr)
-        
+
         # Write to file if specified
         if self.log_file:
             try:
@@ -57,23 +57,23 @@ class Logger:
                     f.write(json_str + "\n")
             except Exception:
                 pass  # Don't fail on log write errors
-    
+
     def debug(self, message: str, **kwargs):
         """Log debug message."""
         self._log("DEBUG", message, **kwargs)
-    
+
     def info(self, message: str, **kwargs):
         """Log info message."""
         self._log("INFO", message, **kwargs)
-    
+
     def warning(self, message: str, **kwargs):
         """Log warning message."""
         self._log("WARNING", message, **kwargs)
-    
+
     def error(self, message: str, **kwargs):
         """Log error message."""
         self._log("ERROR", message, **kwargs)
-    
+
     def critical(self, message: str, **kwargs):
         """Log critical message."""
         self._log("CRITICAL", message, **kwargs)
@@ -82,4 +82,3 @@ class Logger:
 def get_logger(job_id: Optional[str] = None, log_file: Optional[Path] = None) -> Logger:
     """Get a logger instance."""
     return Logger(job_id=job_id, log_file=log_file)
-

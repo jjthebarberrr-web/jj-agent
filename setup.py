@@ -34,7 +34,12 @@ setup(
     },
     include_package_data=True,
     package_data={
-        "": ["capabilities.yaml", "capabilities.prod.yaml", "*.service", "logrotate.conf"],
+        "": [
+            "capabilities.yaml",
+            "capabilities.prod.yaml",
+            "*.service",
+            "logrotate.conf",
+        ],
     },
     classifiers=[
         "Development Status :: 4 - Beta",
@@ -47,4 +52,3 @@ setup(
         "Programming Language :: Python :: 3.11",
     ],
 )
-
