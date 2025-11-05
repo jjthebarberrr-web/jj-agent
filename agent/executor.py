@@ -230,21 +230,37 @@ class Executor:
             # Log result
             if result.get("success"):
                 if result.get("denied"):
+                    error_reason = str(result.get("error", "Denied"))
                     self.logger.warning(
                         f"Action denied: {tool_name}",
                         tool=tool_name,
-                        reason=result.get("error"),
+                        reason=error_reason,
                     )
+                    if self.audit:
+                        self.audit.log_denial(tool_name, args, error_reason)
                 else:
                     self.logger.info(
                         f"Step {i+1} succeeded: {tool_name}", step=i + 1, tool=tool_name
                     )
             else:
+                error_reason = str(result.get("error", "Unknown error"))
                 self.logger.error(
                     f"Step {i+1} failed: {tool_name}",
                     step=i + 1,
                     tool=tool_name,
-                    error=result.get("error"),
+                    error=error_reason,
+                )
+
+            if self.audit:
+                exit_code = result.get("returncode")
+                if not isinstance(exit_code, int):
+                    exit_code = None
+                self.audit.log_action(
+                    tool=tool_name,
+                    args=args,
+                    result=result,
+                    duration_ms=duration_ms,
+                    exit_code=exit_code,
                 )
 
         duration = time.time() - start_time

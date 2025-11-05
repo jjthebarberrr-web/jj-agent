@@ -7,7 +7,10 @@ from typing import Any, Optional
 from datetime import datetime
 import re
 
-from ..config import config
+try:
+    from ..config import config  # when installed as package
+except ImportError:
+    from config import config  # fallback for direct execution
 
 
 class Logger:
