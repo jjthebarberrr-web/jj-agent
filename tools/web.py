@@ -5,6 +5,7 @@ from typing import Dict, Any, Optional
 from urllib.parse import urlparse
 
 from ..config import config
+from jj_agent import __version__
 
 
 class WebTool:
@@ -95,9 +96,8 @@ class WebTool:
             import httpx
             
             # Set User-Agent
-            version = getattr(config, 'version', '0.1.0')
             headers = {
-                "User-Agent": f"JJ-Agent/{version}"
+                "User-Agent": f"JJ-Agent/{__version__}"
             }
             
             # Fetch with timeout
@@ -110,7 +110,6 @@ class WebTool:
             
             # Redact secrets from content
             content = response.text
-            from ..config import config
             content = config.redact_secrets(content)
             
             return {

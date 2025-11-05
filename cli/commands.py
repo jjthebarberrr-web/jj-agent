@@ -23,7 +23,6 @@ def cmd_doctor() -> int:
     print(f"\nPython: {sys.version.split()[0]}")
     
     # Docker
-    docker_ok = False
     try:
         result = subprocess.run(
             ["docker", "--version"],
