@@ -76,7 +76,7 @@ class StateManager:
 
     def list_runs(self, limit: int = 10) -> List[Dict[str, Any]]:
         """List recent runs."""
-        runs = []
+        runs: List[Dict[str, Any]] = []
         for run_file in sorted(self.state_dir.glob("run_*.json"), reverse=True):
             if len(runs) >= limit:
                 break

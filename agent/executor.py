@@ -204,6 +204,15 @@ class Executor:
                 f"Step {i+1}/{len(plan)}: {tool_name}", step=i + 1, total=len(plan)
             )
 
+            if not isinstance(tool_name, str) or not tool_name:
+                self.logger.error(
+                    "Invalid tool name in plan",
+                    step=i + 1,
+                    tool=tool_name,
+                    args=args,
+                )
+                continue
+
             result = self._execute_tool_call(tool_name, args)
             results.append(
                 {"step": i + 1, "tool": tool_name, "args": args, "result": result}

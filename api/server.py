@@ -2,7 +2,7 @@
 
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
-from typing import Dict, Any
+from typing import Dict, Any, Union
 import sys
 from pathlib import Path
 
@@ -22,7 +22,7 @@ async def healthz() -> Dict[str, Any]:
 
 
 @app.get("/readyz")
-async def readyz() -> Dict[str, Any]:
+async def readyz() -> Union[Dict[str, Any], JSONResponse]:
     """Readiness probe."""
     # Check if we can load capabilities
     try:

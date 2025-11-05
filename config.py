@@ -3,7 +3,7 @@
 import os
 from pathlib import Path
 from typing import Dict, Any, Optional
-import yaml
+import yaml  # type: ignore[import-untyped]
 from dotenv import load_dotenv
 
 
